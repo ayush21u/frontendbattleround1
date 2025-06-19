@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Frontend Battle Round 1</title>
+  
+  <!-- AOS (Scroll Animation) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Loader */
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+    }
+
+    /* Light/Dark Mode */
+    body.light-mode {
+      background: #fff;
+      color: #000;
+    }
+
+    body.dark-mode {
+      background: #121212;
+      color: #fff;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: #333;
+      color: #fff;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    #modeToggle {
+      cursor: pointer;
+      padding: 5px 10px;
+      background: #444;
+      border: none;
+      color: #fff;
+      border-radius: 4px;
+    }
+
+    section {
+      padding: 60px 20px;
+      min-height: 100vh;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    form button {
+      padding: 10px 20px;
+      background: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body class="light-mode">
+
+  <!-- Loader -->
+  <div id="loader">Loading...</div>
+
+  <!-- Navbar -->
+  <nav>
+    <div>Frontend Battle</div>
+    <div>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+      <button id="modeToggle">Dark Mode</button>
+    </div>
+  </nav>
+
+  <!-- Sections -->
+  <section id="home" data-aos="fade-up">
+    <h1>Welcome to Frontend Battle</h1>
+    <p>This is the Home section. Compete, Code, Conquer!</p>
+  </section>
+
+  <section id="about" data-aos="fade-left">
+    <h1>About</h1>
+    <p>This challenge tests your frontend skills in replication and innovation.</p>
+  </section>
+
+  <section id="gallery" data-aos="fade-right">
+    <h1>Gallery</h1>
+    <p>Display images and videos from resources.</p>
+    <img src="assets/sample-image.jpg" alt="Sample" width="300" />
+    <br><br>
+    <video width="320" height="240" controls>
+      <source src="assets/sample-video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <section id="contact" data-aos="zoom-in">
+    <h1>Contact</h1>
+    <form onsubmit="return validateForm()">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- Scripts -->
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+      }, 2000);
+    });
+
+    const toggleBtn = document.getElementById('modeToggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      document.body.classList.toggle('light-mode');
+      toggleBtn.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+    });
+
+    function validateForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if (!name || !email || !message) {
+        alert("Please fill all fields.");
+        return false;
+      }
+      alert("Form submitted!");
+      return true;
+    }
+  </script>
+</body>
+</html>
